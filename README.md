@@ -4,4 +4,6 @@
 - Alexis Reyes 
 ## Instructions
 - To run the program, compile the 'project1_starter.cpp' file
-                g++ project1_starter.cpp -0 porject1_starter
+```
+g++ project1_starter.cpp -0 porject1_starter
+```
