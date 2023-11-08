@@ -6,65 +6,87 @@
 
 using namespace std;
 
+void convertArray(const string& scheduleString, string scheduleArray[], int& count){
+//converts / goes through the schedules from person1 & 2 & then stores them 
 
-/*functions: 
+}
 
 
-mergeSchedules(){} //takes schedule from both people & creates single schedule to find out when both persons are available.
-possibleAvailabilities(){} // returns a list of time ranges when both individuals have availability
-matchedAvailabilities(){} //returns the available time slots that are long enough to hold a meeting of the duration
+bool meetingDuration() { //checks to make sure the meeting time is not less 
+}
 
-*/
+// Function to calculate available meeting times
+void availTime2Meet() {
+
+}
 
 int main(){
 
     ifstream inputFile("Input.txt");
     ofstream outputFile("Output.txt"); 
-    int durationMeeting = 0; 
-    string person1_Schedule, person2_Schedule,
-        person1_DailyAvail, person2_DailyAvail;  
-
+    
 
     if (!inputFile.is_open()) {
     cerr << "Error opening the input file." << endl;
     return 1;
 }
+        const int maxSchedules = 6; //total number of schedule intervals for each person
+        const int maxAvail = 10; //  number of available meeting times ...can increase if adding more test cases
+        int durationMeeting = 0, //duration of meeting
+            countP1 = 0, 
+            countP2 = 0,
+            availCount = 0; // keeps track of the number of availabale times
+        string schedule1Arr[maxSchedules];
+        string schedule2Arr[maxSchedules];
+        string avail[maxAvail]; //stores available meeting times
+        string person1_Schedule, 
+               person2_Schedule,
+               person1_DailyAvail, 
+               person2_DailyAvail;  
+         vector<string> availabilities;
+
+        //reads the schedule & daily availabiltiy for each person
+        getline(inputFile, person1_Schedule); 
+        getline(inputFile, person1_DailyAvail);
+        getline(inputFile, person2_Schedule);  
+        getline(inputFile, person2_DailyAvail); 
+        inputFile >> durationMeeting; 
+        
+
+        //call converArray function
+        convertArray(person1_Schedule, schedule1Arr, countP1);
+        convertArray(person2_Schedule, schedule2Arr, countP2);
+        availTime2Meet();
 
 
-    getline(inputFile, person1_Schedule); 
-    getline(inputFile, person1_DailyAvail);
-    getline(inputFile, person2_Schedule);  
-    getline(inputFile, person2_DailyAvail); 
-    inputFile >> durationMeeting; 
-
-   /* for(int numTestCases = 0; numTestCases < 10; numTestCases++){
-
-
-
-
-
-    }
-
-*/
-
-    if (outputFile.fail()) {
+         if (outputFile.fail()) {
         cout << "Error opening file." << endl;
         exit(1);
-    }
-    //Now writing data to the file
-    outputFile << "[";
-    outputFile << "]"; 
+        }
+        else
+        {
+           for (int i = 0; i < availCount; i++) {
+            //Now writing data to the file
+            outputFile << "[ ";
+            outputFile << "Available: " << avail[i] << endl;
+            outputFile << "] ";
+             }
+        }
 
-    inputFile.close(); 
-    outputFile.close(); 
+    
+    
 
+    //just used to help me visualize input -> outpout
     cout << "person1_Schedule = " << person1_Schedule << endl;
     cout << "person1_DailyAct = " << person1_DailyAvail << endl;
     cout << "person2_Schedule = " << person2_Schedule << endl;
     cout << "person2_DailyAct = " << person2_DailyAvail << endl;
     cout << "duration_of_meeting = " << durationMeeting << endl;
 
+    
+    inputFile.close(); 
+    outputFile.close(); 
+
 
     return 0; 
 }
-
